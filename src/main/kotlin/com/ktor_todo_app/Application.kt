@@ -1,6 +1,6 @@
 package com.ktor_todo_app
 
-import com.ktor_todo_app.plugins.*
+import com.ktor_todo_app.plugins.routes.configureRouting
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*

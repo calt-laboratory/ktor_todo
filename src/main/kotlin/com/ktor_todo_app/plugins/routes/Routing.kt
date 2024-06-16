@@ -1,5 +1,7 @@
-package com.ktor_todo_app.plugins
+package com.ktor_todo_app.plugins.routes
 
+import com.ktor_todo_app.plugins.repository.InMemoryToDoRepository
+import com.ktor_todo_app.plugins.repository.ToDoRepositoryPattern
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*

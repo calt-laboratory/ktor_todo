@@ -1,4 +1,6 @@
-package com.ktor_todo_app.plugins
+package com.ktor_todo_app.plugins.repository
+
+import com.ktor_todo_app.plugins.entities.ToDo
 
 interface ToDoRepositoryPattern {
     fun getAllToDos() : List<ToDo>
