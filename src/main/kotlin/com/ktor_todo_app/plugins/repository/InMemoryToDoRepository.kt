@@ -30,14 +30,14 @@ class InMemoryToDoRepository : ToDoRepositoryPattern {
         return todo
     }
 
-    override fun deleteToDo(id: Int): Boolean {
-        return todos.removeIf { it.id == id }
-    }
-
     override fun updateToDo(id: Int, draft: ToDoDraft): Boolean {
         val todo = todos.firstOrNull { it.id == id } ?: return false
         todo.title = draft.title
         todo.done = draft.done
         return true
+    }
+
+    override fun deleteToDo(id: Int): Boolean {
+        return todos.removeIf { it.id == id }
     }
 }
