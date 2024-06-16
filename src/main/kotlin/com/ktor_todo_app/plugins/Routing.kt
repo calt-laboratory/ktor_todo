@@ -1,5 +1,6 @@
 package com.ktor_todo_app.plugins
 
+import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.callloging.*
@@ -16,28 +17,33 @@ fun Application.configureRouting(routing: Routing) {
             prettyPrint = true
             isLenient = true
         })
-
     }
 
     routing {
 
-        val todos = listOf(
-            Todo(id = 2, title = "learn Kotlin", done = true),
-            Todo(id = 3, title = "learn Python", done = true),
-            Todo(id = 1, title = "learn ktor", done = false),
-        )
+        val repository: ToDoRepositoryPattern = InMemoryToDoRepository()
 
         get(path = "/") {
             call.respondText("Todo List")
         }
 
         get(path = "/todos") {
-            call.respond(todos)
+            call.respond(repository.getAllToDos())
         }
 
         get(path = "/todos/{id}") {
-            val id = call.parameters["id"]
-            call.respondText { "Todo item: $id"}
+            val id = call.parameters["id"]?.toIntOrNull()
+            if (id == null) {
+                call.respond(HttpStatusCode.BadRequest, message = "ID must be an integer")
+                return@get
+            }
+
+            val todo = repository.getSingleToDo(id = id)
+            if (todo == null) {
+                call.respond(HttpStatusCode.NotFound, message = "Todo not found")
+            } else {
+                call.respond(todo)
+            }
         }
 
         post(path = "/todos") {
