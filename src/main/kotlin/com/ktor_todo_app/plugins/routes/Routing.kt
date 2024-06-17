@@ -1,9 +1,8 @@
 package com.ktor_todo_app.plugins.routes
 
 import com.ktor_todo_app.plugins.entities.ToDoDraft
-import com.ktor_todo_app.plugins.repository.InMemoryToDoRepository
+import com.ktor_todo_app.plugins.repository.PostgresToDoRepository
 import com.ktor_todo_app.plugins.repository.ToDoRepositoryPattern
-import com.ktor_todo_app.plugins.utils.respondTodos
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -26,15 +25,14 @@ fun Application.configureRouting(routing: Routing) {
 
     routing {
 
-        val repository: ToDoRepositoryPattern = InMemoryToDoRepository()
+        val repository: ToDoRepositoryPattern = PostgresToDoRepository()
 
         get(path = "/") {
             call.respondText("Todo List")
         }
 
         get(path = "/todos") {
-            // call.respond(repository.getAllToDos())
-            call.respondTodos(repository = repository)
+            call.respond(repository.getAllToDos())
         }
 
         get(path = "/todos/{id}") {
