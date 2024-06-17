@@ -3,6 +3,7 @@ package com.ktor_todo_app.plugins.routes
 import com.ktor_todo_app.plugins.entities.ToDoDraft
 import com.ktor_todo_app.plugins.repository.InMemoryToDoRepository
 import com.ktor_todo_app.plugins.repository.ToDoRepositoryPattern
+import com.ktor_todo_app.plugins.utils.respondTodos
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -32,7 +33,8 @@ fun Application.configureRouting(routing: Routing) {
         }
 
         get(path = "/todos") {
-            call.respond(repository.getAllToDos())
+            // call.respond(repository.getAllToDos())
+            call.respondTodos(repository = repository)
         }
 
         get(path = "/todos/{id}") {
