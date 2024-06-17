@@ -49,4 +49,24 @@ class DatabaseManager {
         }
         return newToDo
     }
+
+    fun updateToDo(id: Int, toDoDraft: ToDoDraft) : Boolean {
+        return transaction(db = exposedDatabase) {
+            val toDo = DBToDoEntity.findById(id = id)
+            if (toDo != null) {
+                toDo.title = toDoDraft.title
+                toDo.done = toDoDraft.done
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    fun deleteToDo(id: Int) : Boolean {
+        return transaction(db = exposedDatabase) {
+            DBToDoEntity.findById(id = id)?.delete()
+            false
+        }
+    }
 }
