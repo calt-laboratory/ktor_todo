@@ -23,12 +23,23 @@ repositories {
 }
 
 dependencies {
+    // Ktor
     implementation("io.ktor:ktor-server-core-jvm")
     implementation("io.ktor:ktor-server-netty-jvm")
-    implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.ktor:ktor-server-call-logging:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+    // Database
+    // implementation("mysql:mysql-connector-java:8.0.33")
+    // implementation("org.ktorm:ktorm-core:4.0.0")
+    // implementation("org.ktorm:ktorm-support-mysql:4.0.0")
+    implementation("org.jetbrains.exposed:exposed-core:0.51.1")
+    implementation("org.jetbrains.exposed:exposed-dao:0.51.1")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.51.1")
+    implementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.51.1")
+    implementation("org.postgresql:postgresql:42.7.3")
+
+    implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.0")
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
