@@ -17,9 +17,18 @@ object DBToDoTable : IntIdTable(name = "todo") {
 }
 
 
+/**
+ * Represents a single row/entry/entity in the table.
+ * (An entity represents a single instance or row of a table.)
+ *
+ * Encapsulates the data of a row and its behavior (methods).
+ * In the Exposed library, an entity is defined using the IntEntity or Entity class.
+ *
+ * Linked to the DBToDoTable and provides an interface to interact w/ items in the database.
+ */
 class DBToDoEntity(id: EntityID<Int>): IntEntity(id) {
 
-    companion object : IntEntityClass<DBToDoEntity>(DBToDoTable)
+    companion object : IntEntityClass<DBToDoEntity>(table = DBToDoTable)
 
     var title by DBToDoTable.title
     var done by DBToDoTable.done
