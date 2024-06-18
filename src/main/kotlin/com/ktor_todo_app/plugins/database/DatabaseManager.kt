@@ -65,8 +65,8 @@ class DatabaseManager {
 
     fun deleteToDo(id: Int) : Boolean {
         return transaction(db = exposedDatabase) {
-            DBToDoEntity.findById(id = id)?.delete()
-            false
+            val todo = DBToDoEntity.findById(id = id)
+            todo?.delete() != null
         }
     }
 }

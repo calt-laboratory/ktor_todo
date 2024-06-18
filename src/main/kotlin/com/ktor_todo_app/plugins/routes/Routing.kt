@@ -64,7 +64,7 @@ fun Application.configureRouting(routing: Routing) {
                 return@put
             }
 
-            val updatedToDo = repository.updateToDo(id = id, draft = todoDraft)
+            val updatedToDo = repository.updateToDo(id = id, toDoDraft = todoDraft)
             if (updatedToDo) {
                 call.respond(HttpStatusCode.OK, message = "ToDo w/ ID $id has been updated")
             } else {

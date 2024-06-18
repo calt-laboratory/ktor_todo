@@ -8,9 +8,9 @@ interface ToDoRepositoryPattern {
 
     fun getSingleToDo(id: Int) : ToDo?
 
-    fun addToDo(draft: ToDoDraft) : ToDo
+    fun addToDo(toDoDraft: ToDoDraft) : ToDo
 
     fun deleteToDo(id: Int) : Boolean
 
-    fun updateToDo(id: Int, draft: ToDoDraft) : Boolean
+    fun updateToDo(id: Int, toDoDraft: ToDoDraft) : Boolean
 }

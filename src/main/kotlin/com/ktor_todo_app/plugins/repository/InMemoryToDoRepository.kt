@@ -20,20 +20,20 @@ class InMemoryToDoRepository : ToDoRepositoryPattern {
         return todos.firstOrNull { it.id == id }
     }
 
-    override fun addToDo(draft: ToDoDraft): ToDo {
+    override fun addToDo(toDoDraft: ToDoDraft): ToDo {
         val todo = ToDo(
             id = todos.size + 1,
-            title = draft.title,
-            done = draft.done,
+            title = toDoDraft.title,
+            done = toDoDraft.done,
         )
         todos.add(todo)
         return todo
     }
 
-    override fun updateToDo(id: Int, draft: ToDoDraft): Boolean {
+    override fun updateToDo(id: Int, toDoDraft: ToDoDraft): Boolean {
         val todo = todos.firstOrNull { it.id == id } ?: return false
-        todo.title = draft.title
-        todo.done = draft.done
+        todo.title = toDoDraft.title
+        todo.done = toDoDraft.done
         return true
     }
 

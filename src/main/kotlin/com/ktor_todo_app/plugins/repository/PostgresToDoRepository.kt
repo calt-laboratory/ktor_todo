@@ -4,6 +4,7 @@ import com.ktor_todo_app.plugins.database.DatabaseManager
 import com.ktor_todo_app.plugins.entities.ToDo
 import com.ktor_todo_app.plugins.entities.ToDoDraft
 
+
 class PostgresToDoRepository : ToDoRepositoryPattern {
 
     private val database = DatabaseManager()
@@ -14,19 +15,20 @@ class PostgresToDoRepository : ToDoRepositoryPattern {
     }
 
     override fun getSingleToDo(id: Int): ToDo? {
-        TODO("Not yet implemented")
+            val toDoEntity = database.getSingleToDo(id)
+            return toDoEntity?.let { ToDo(it.id.value, it.title, it.done) }
     }
 
-    override fun addToDo(draft: ToDoDraft): ToDo {
-        TODO("Not yet implemented")
+    override fun addToDo(toDoDraft: ToDoDraft): ToDo {
+        val toDoEntity = database.addToDo(toDoDraft = toDoDraft)
+        return ToDo(toDoEntity.id.value, toDoEntity.title, toDoEntity.done)
+    }
+
+    override fun updateToDo(id: Int, toDoDraft: ToDoDraft): Boolean {
+        return database.updateToDo(id = id, toDoDraft = toDoDraft)
     }
 
     override fun deleteToDo(id: Int): Boolean {
-        TODO("Not yet implemented")
+        return database.deleteToDo(id = id)
     }
-
-    override fun updateToDo(id: Int, draft: ToDoDraft): Boolean {
-        TODO("Not yet implemented")
-    }
-
 }
